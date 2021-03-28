@@ -494,7 +494,7 @@ En esta sección, se muestran los resultados de reconstrucciones.
 Esta versión de genedigitana tiene la opción de mostrar los resultados del proceso en forma de gráfico en 3D, donde las trazas reconstruídas se muestran como líneas continuas, las trazas simuladas como líneas discontínuas, y en color morado se intuye la topología de cada detector. Estas líneas contínuas que representan las trazas reconstruídas, se colorean siguiendo un gradiente desde rojo a amarillo según el valor de $\chi^2$ obtenido en la reconstrucción, siendo el color rojo para la mejor reconstrucción y el amarillo para la peor.
 
 
-\begin{figure}[H] 
+\begin{figure}[H]  % La "H" es para que se queden fijados en este mismo sitio. Para dejar decidir a LaTeX utilizar "ht"
   \begin{subfigure}[b]{0.5\linewidth}
     \centering
     % NOTE:          trim={<left> <lower> <right> <upper>}
@@ -567,11 +567,18 @@ Finalmente, se muestra a continuación como ejemplo algunos de los datos generad
 
 \begin{figure}[H] 
   \centering
-  \includegraphics[width=\linewidth]{tabla_parametros.png} 
-  \caption{Datos de la reconstrucción en \textsc{tragaldabas}.}
+  \includegraphics[width=\linewidth]{tabla_param_tragas.png} 
+  \caption{Datos de la reconstrucción en el detector \textsc{tragaldabas}.}
   \label{fg:datos_tragas} 
 \end{figure}
 
+
+\begin{figure}[H] 
+  \centering
+  \includegraphics[width=\linewidth]{tabla_param_stratos.png} 
+  \caption{Datos de la reconstrucción en el detector \textsc{stratos}.}
+  \label{fg:datos_stratos} 
+\end{figure}
 
 \section{Apéndice}
 
