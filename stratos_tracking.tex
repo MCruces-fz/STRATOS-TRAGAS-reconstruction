@@ -123,8 +123,6 @@
 
 \begin{document}
 
-
-
 \begin{centering}
 
 \begin{minipage}[c]{0.4\linewidth}
@@ -133,18 +131,13 @@
 \end{minipage}
 
 	\vspace{1.5cm}
-    {\huge\bfseries Reconstrucci\'on de trazas en detectores tipo \textsc{Trasgo} para la medida e identificación de rayos cósmicos.\par}
-	\vspace{0.25cm}
+    {\huge\bfseries Reconstrucci\'on de trazas en detectores tipo \textsc{Trasgo} para la medida de rayos cósmicos:\\
+    Detectores TRAGALDABAS y STRATOS
+    \par}
+  
+\vspace{0.5cm}
 
-	
-	\noindent\rule{\textwidth}{1pt}
-    
-	\vspace{0.25cm}
-{\huge \textbf{Detectores} \\ \textsc{tragaldabas} y \textsc{stratos}\par}
-	
-	\vspace{1cm}
-
-    J.A. Garzón, S. Costa, M. Cruces
+{\Large  Sara Costa, Miguel Cruces,   Juan A. Garzón}
 	
 	\vspace{0.5cm}
 
@@ -179,11 +172,11 @@
 
 \section{Introducción}
 
-Presentamos en este informe un resumen de las actividades realizadas para la puesta a punto de un programa para la reconstrucción de trazas en detectores tipo \textsc{trasgo}, como los detectores del proyecto \textsc{stratos}; en este caso se ha aplicado a detectores de electrodos rectangulares. Para ello se ha adaptado y mejorado una cadena de programas existente que genera datos aleatorios, los digitaliza y, finalmente, los reconstruye, permitiendo estimar tanto la eficiencia como la resolución de la reconstrucción realistas asociadas a un detector. Como novedad, hemos introducido la posibilidad de buscar candidatos a trazas mediante un algoritmo de filtrado de Kalman. Esto permitirá separar y reconstruir las cascada electromagnéticas asociadas a electrones y gammas con una gran eficacia.
+Presentamos en este informe un resumen de las actividades realizadas para la puesta a punto de un programa para la reconstrucción de trazas en detectores tipo \textsc{trasgo}, en particular para los detectores del proyecto \textsc{stratos}. Para ello se ha adaptado y mejorado una cadena de programas existente, GENEDITIGTANA, que genera datos aleatorios, los digitaliza y, finalmente, los reconstruye, permitiendo estimar tanto la aceptancia mo la resolución de la reconstrucción realistas asociadas a un detector. Como novedad, hemos introducido la posibilidad de buscar candidatos a trazas mediante un algoritmo de filtrado de Kalman. Esto permitirá separar y reconstruir las cascada electromagnéticas asociadas a electrones y gammas, tarea imprescindible para los estudios atmosféricos que pretendemos, con una gran eficacia.
 
 \section{Los detectores tipo  \textsc{trasgo} y la atmósfera}
 
-El desarrollo de la tecnología RPC (Resistive Plate Chambers) propia de experimentos de Física Nuclear  y de Física de Partículas de Altas Energías y ha abierto la posibilidad de diseñar y construir detectores de rayos cósmicos de nueva generación capaces de medir con gran precisión haces de electrones de alta multiplicidad y muones de origen cósmico a nivel del suelo. Sin duda, la propuesta mas interesante de dicho tipo de detectores a nivel mundial la constituyen los detectores tipo \textsc{trasgo} \cite{jag, moscu}, desarrollados por la Universidad de Santiago de Compostela en colaboración con el LIP de Coimbra y en los que las empresas HIdronav  y Digafer han tenido una papel muy  destacado, proporcionando soporte técnico, material electrónico y desarrollo instrumental. Fruto de ello han sido los detectores \textsc{tragaldabas}, actualmente tomando datos en la Univ. de Santiago de Compostela, el detector \textsc{tristan}, instalado en una base española en la Antártida, y el detector \textsc{mutt}, que estuvo instalado en los locales de Digafer, cerca de Porriño, siendo pionero en usar la tecnología de RPCs para la realización de tomografía mediante rayos cósmicos. 
+El desarrollo de la tecnología RPC (Resistive Plate Chambers) propia de experimentos de Física Nuclear  y de Física de Partículas de Altas Energías y ha abierto la posibilidad de diseñar y construir detectores de rayos cósmicos de nueva generación capaces de medir con gran precisión haces de electrones de alta multiplicidad y muones de origen cósmico a nivel del suelo. Sin duda, la propuesta mas interesante de dicho tipo de detectores a nivel mundial la constituyen los detectores tipo \textsc{trasgo} \cite{jag, moscu}, desarrollados por la Universidad de Santiago de Compostela en colaboración con el LIP de Coimbra.  Las empresas HIdronav  y Digafer han tenido una papel muy  destacado, proporcionando soporte técnico, material electrónico y desarrollo instrumental. Fruto de ello han sido los detectores \textsc{tragaldabas}, actualmente tomando datos en la Univ. de Santiago de Compostela, el detector \textsc{tristan}, instalado en una base española en la Antártida, y el detector \textsc{mutt}, que estuvo instalado en los locales de Digafer, cerca de Porriño, siendo pionero en usar la tecnología de RPCs para la realización de tomografía mediante rayos cósmicos. Finalmente, el proyecto \textsc{Stratos} constituye un salto adelante muy importante pues reúne gran parte de la experiencia adquirida en los proyecto anteriores con el desarrollo de una nueva familia de detectores con prestaciones en posición, reconstrucción angular y resolución angular muy por encima de los conseguidos en los detectores previos.
 
 Es bien conocido el importante efecto que las condiciones atmosféricas, en particular la presión y el perfil de temperaturas de la atmósfera sobre el detector, ejercen sobre el resultado de la  medida de rayos cósmicos medidos en tierra. En particular, es muy interesante la correlación observada entre la tasa de muones de muy alta energía medida en tierra y la temperatura efectiva de la atmósfera, en la que dominan las variaciones de la temperatura en la estratosfera. Ello abre la posibilidad de aprovechar las magníficas prestaciones que ofrecen los detectores tipo \textsc{trasgo}, capaces de acceder a información vedada a los detectores de rayos cósmicos tradicionales, para estimar en tiempo real el perfil de temperaturas de la atmósfera en la vertical del detector. 
 Esta posibilidad conlleva la necesidad de desarrollar y poner a punto algoritmos novedosos de reconstrucción de la dirección de llega de electrones y muones y que, además, permitan tanto su identificación como incluso la estimación de la energía de las cascadas electromagnéticas inducidas por los electrones de alta energía.
@@ -202,50 +195,54 @@ Esta posibilidad conlleva la necesidad de desarrollar y poner a punto algoritmos
   \begin{subfigure}[c]{0.45\linewidth}
     \centering
     \includegraphics[width=\linewidth]{tragas_3d.png} 
-    \caption{Representación del detector \textsc{tragaldabas} en su versión con cuatro RPCs. Partículas con distinta naturaleza dejan una huella diferente en el detector.}
+    \caption{Diferentes tipos de partículas muestran diferentes topologías típicas a su paso por el detector.}
     \label{fg:intro1-a} 
   \end{subfigure} 
   \hspace{0.2cm}
-  \begin{subfigure}[c]{0.45\linewidth}
+  \begin{subfigure}[c]{0.50\linewidth}
     \centering
     \includegraphics[width=\linewidth]{b_midasp.jpeg} 
-    \caption{Separación entre muones y electrones a partir de la topología del evento.} 
+    \caption{Ejemplo de cómo la medida del número de celdas impactadas y el alcance ponderado de las trazas permiten separar electrones de muones.} 
     \label{fg:intro1-b} 
   \end{subfigure}%% 
-  \caption{Capacidad de separación de los detectores de tipo \textsc{trasgo}}
+  \caption{Ejemplo de la capacidad de identificación de los detectores de tipo \textsc{trasgo}, aplicada al detector  \textsc{tragaldabas} de la USC.}
   \label{fg:intro1} 
 \end{figure}
 
 La figura \ref{fg:intro1-a} resume el fundamento de la capacidad de los detectores tipo \textsc{trasgo} para la identificación de los diferentes tipos de partículas. En relación con la separación entre muones y electrones, es de destacar que mientras los primeros deben de producir trazas rectilíneas proporcionando un buen ajuste, los electrones de alta energía tienen tendencia a producir cascadas electromagnéticas formadas por nuevos electrones y gammas activando un número elevado de electrodos. Dicho efecto queda bien reflejado en los resultados de simulación que se muestran en la figura \ref{fg:intro1-b}. En ella se observa la capacidad que un detector tipo \textsc{trasgo} ofrece para separar electrones y muones analizando algunos observables; en concreto, el valor del chi cuadrado del ajuste, el numero de celdas activadas y el alcance ponderado, que tiene en cuenta la distribución longitudinal de las celdas activadas. La capacidad de distinguir electrones de muones alcanza valores que superan el 90 por ciento.
 
-TimTrack \cite{ttrack} y el filtrado de Kalman \cite{joaneh} son dos herramientas de reconstrucción de trazas ideales para sacar provecho de la magníficas prestaciones que ofrecen los detectores tipo \textsc{trasgo}. La primera de ellas fue desarrollada específicamente para este tipo de detectores mientras que la segunda constituye un estándar ampliamente utilizado en la ciencia y en la técnica. Hemos aplicado ambas herramientas al desarrollo de un programa de reconstrucción de haces de partículas, necesario para su uso en el proyecto \textsc{stratos}, si bien lo hemos aplicado también a la estructura en electrodos planos del detector \textsc{tragaldabas} de la Univ. de Santiago de Compostela, ya que para él disponemos ya de datos reales. Para ello nos hemos ayudado de la cadena de programas Genedigitana, que permite simular la respuesta de un detector cualquiera a la incidencia de partículas cargadas y proceder después a su reconstrucción y estimar la incertidumbre de los parámetros de la partícula incidentes, junto con su matriz de correlación.
+TimTrack \cite{ttrack} y el filtrado de Kalman \cite{joaneh} son dos herramientas de reconstrucción de trazas ideales para sacar provecho de la magníficas prestaciones que ofrecen los detectores tipo \textsc{trasgo}. La primera de ellas fue desarrollada específicamente para este tipo de detectores mientras que la segunda constituye un estándar ampliamente utilizado en la ciencia y en la técnica. Hemos aplicado ambas herramientas al desarrollo de un programa de reconstrucción de haces de partículas, necesario para su uso en el proyecto \textsc{stratos}, si bien lo hemos aplicado también a la estructura en electrodos planos del detector \textsc{tragaldabas} de la Univ. de Santiago de Compostela, ya que para él disponemos de datos reales. Para ello nos hemos ayudado de la cadena de programas \textit{genedigitana}, que permite simular la respuesta de un detector cualquiera a la incidencia de partículas cargadas y proceder después a su reconstrucción y estimar la incertidumbre de los parámetros de la partícula incidentes, junto con su matriz de correlación.
 
 %El detector está basado en la tecnología \textsc{rpc}\footnote{Resistive Plate Chamber} que ofrece una superficie de 1.8 m$^2$ con granularidad de 120 celdas, capacidad de multitracking, resolución temporal entorno a 0.4 ns, con una resolución angular cerca de los 3$^\circ$ y aceptancia angular de 40$^\circ$.
 
 
 \section{Genedigitana}
 
-Genedigitana es un acrónimo de las tres palabras generación, digitalización y análisis y llamamos así a un programa,  o cadena de subprogramas, desarrollado en el LabCAF y escrito en \textsf{Matlab} y en \textsf{Python} y que puede ser usado para el estudio de las prestaciones de cualquier detector de partículas de configuración conocida. El programa permite incluir efectos como zonas muertas en los detectores, ineficiencias o ruido de cualquier tipo, siendo así extremadamente útil para la simulación realista de un cierto detector. 
+\textit{GENEDIGITANA} es el acrónimo de las tres palabras generación, digitalización y análisis y llamamos así a un programa,  o cadena de subprogramas, desarrollado en el LabCAF y disponible en \textsf{Mathematica} y en \textsf{Python} y que puede ser usado para el estudio de las prestaciones de cualquier detector de partículas de configuración conocida. El programa permite incluir efectos como zonas muertas en los detectores, ineficiencias o ruido de cualquier tipo, siendo así extremadamente útil para la simulación realista de un cierto detector. 
 
-Hemos partido de un script en \textsf{Python} de \textit{genedigitana} diseñado por el Prof. Juan A. Garzón y editado por Sara Costa Faya, se acomodó para aplicar el proceso a la estructura del detector de tipo \textsc{trasgo}, \textsc{tragaldabas}, así como también se amplió el código para añadir funcionalidades y mayor flexibilidad y robustez.
+Hemos partido de un script previo en \textsf{Python} de \textit{GENEDIGITANA}, acomodándolo para aplicar el proceso a la estructura de los detectores \textsc{tragaldabas} y  \textsc{stratos}. También hemos ampliado el código para añadir nuevas funcionalidades y mayor flexibilidad y robustez.
 
-El proceso \textit{genedigitana} consta de tres partes:
+La cadena \textit{genedigitana} consta de tres procesos:
+
 \begin{itemize}
-    \item Generación: construcción aleatoria de rectas en tres dimensiones que emulan trazas de partículas, a las que llamamos \textit{saetas}.
-    \item Digitalización: conversión de las trazas en forma analítica a una serie de coordenadas correspondientes a las que serían medidas por otro detector de tipo \textsc{trasgo}, \textsc{tristan}\footnote{\textsc{tr}\textit{asgo para} \textsc{i}\textit{nve}\textsc{st}\textit{igaciones}  \textsc{an}\textit{tarticas}: Detector desarrollado para complementar otros detectores del observatorio \textsc{orca} que ha sido instalado en una de las bases españolas en la Antártida.}.
+    \item Generación: construcción aleatoria de rectas en tres dimensiones que emulan trayectorias de partículas que se mueven a una cierta velocidad e incidiendo en el detector en un cierto instante de tiempo.
+        
+    \item Digitalización: conversión de la información analítica del paso de la partícula por un detector a la respuesta  esperada que de dicho detector. Este proceso es conveniente que sea lo mas realista posible reproduciendo en lo posible todas las características conocidas del detecto, incluidas las zonas muertas o la inefiiciencia en la medida.
+    Por ejemplo, en el caso de un detectores de electrodos rectangujares, o pads, como el \textsc{tragaldabas} , la respuesta esperada son las coordenadas del centro de la celda, donde se supone que está conectado el electrodo de lectura, y un tiempo que es la suma del tiempo de paso de la partícula por el electrodo mas el tiempo que necesita el pulso de la señal inducida en llegar al electrodo de lectura. 
+    En el casa de un detector de electrodos longitudinales, o strips, como \textsc{stratos} la respuesta esperada es son la coordenada de un extremos del strip impactado y los  dos tiempos de llegada del pulso inducido por la llegada de la partícula a ambos extremos del electrodo. A partir de dichas dos medidas se estimarán tanto el tiempo de llegada de la partícula al electrodo como su coordenada transversal en el propio electrodo. 
+    
     \item Análisis: a partir de las coordenadas digitalizadas, se reconstruyen las trazas originales mediante un algoritmo, que inicialmente era TimTrack y en el que hemos incluido la posibilidad de usar un algoritmo basado en el filtrado de Kalman.
 \end{itemize}
 
-La versión actual de Genedigitana se describe a continuación. En el apéndice se muestra una pequeña documentación de las clases utilizadas en el código informático.
+Describimos a continuación algunas de las características de la versión actual de  \textit{GENEDIGITANA} . En el apéndice se muestra una pequeña documentación de las clases utilizadas en el código informático.
 
 \subsection{Generación}
 
-Para definir las trazas de partículas se generan trazas, o rectas, con ángulo polar $(\theta$ y ángulo acimutal $ \phi$ aleatorios, siguiendo una distribución elegida por el usuario. En general, lo mas habitual es elegir una distribución uniforme en ángulo sólido que se corresponde con una distribución uniforme en $\cos \theta$ y $\phi$.
+Para definir las trazas de partículas se generan trazas, o rectas, con ángulo polar $\theta$ y ángulo acimutal $ \phi$ aleatorios, siguiendo una distribución definida por el usuario. Por defecto, lleva definida una distribución uniforme en ángulo sólido que se corresponde con una distribución uniforme en $\cos \theta$ y $\phi$, entre la vertical y un ángulo polar máximo $\theta_{max}$.
 %(¿O debería ser uniforme en $\cos^2 \theta$\footnote{\url{https://www.physics.mcgill.ca/~corriveau/projects/spark/Reports/201209_blanchard_spark.pdf}}?)
-También se genera el punto de incidencia $(x_0, y_0)$  en cualquier punto del plano superior del detector.
+El punto de incidencia $(x_0, y_0)$  se genera con distribución uniforme en cualquier punto del plano superior del detector.
 
-Dado un detector, con un cierto número de planos activos para la medida de las partículas que lo atraviesan, asumimos que  existe un cierto \textit{trigger} entre planos por lo que, para simular un detector real, sólo se aceptan aquellas trazas que dejan señal en dichos planos, descartando todas las demás. Esto permite utilizar el programa también para el cálculo de aceptancias de un detector en función del tamaño del mismo y de la distancia entre los planos del trigger.
-
+Para un detector con un cierto número de planos activos para la medida de las partículas que lo atraviesan, asumimos que  existe un cierto \textit{trigger} entre planos por lo que, para simular un detector real, sólo se aceptan aquellas trazas que dejan señal en dichos planos, descartando todas las demás. Esto permite utilizar el programa también para el cálculo de aceptancias de un detector en función del tamaño del mismo y de la distancia entre los planos del trigger para una cierta distribución de partículas incidentes.
 
 \begin{figure}[h] 
   \centering
@@ -297,7 +294,7 @@ Dado un detector, con un cierto número de planos activos para la medida de las 
 %     \tdplotdrawpolytopearc[-]{0.75}{anchor=north}{$\theta$}
 % \end{tikzpicture}
 
-Cada traza o partícula se caracteriza por seis parámetros que constituyen lo que llamamos una \textsc{Saeta}, $\vec{s}$. 
+Cada traza o partícula viene caracterizada por seis parámetros que constituyen lo que llamamos una \textsc{Saeta}\footnote{SAETA:SmAllest sET of pArameters. La llamamos así porque frente a la costumbre habitual en física  de partículas de definir una partícula por su trayectoria, en nuestra aproximación, al igual que una flecha o saeta, en cada momento lleva asociada también el tiempo de paso por una cierta coordenada y su velocidad}, $\vec{s}$. 
 
 \begin{equation}
     % \vec{s} = (\textsc{x\textbullseye}, \textsc{xp}, \textsc{y\textbullseye}, \textsc{yp}, \textsc{t\textbullseye}, \textsc{s\textbullseye})
@@ -306,10 +303,10 @@ Cada traza o partícula se caracteriza por seis parámetros que constituyen lo q
     \label{eq:saeta}
 \end{equation}
 
-La definición de cada parámetro se muestra en la figura figSaeta \footnote{SmAllest sET of pArameters} y es la siguiente:
+La definición de cada parámetro se muestra en la figura \ref{fg:saeta}  y es la siguiente:
 
 \begin{itemize}
-    \item X0:  Coordenada X del punto de corte de la partícula con el plano en $z=0$.
+    \item X0:  Coordenada X del punto de corte de la partícula con el plano de referencia en $z=0$.
     \item XP:  Pendiente proyectada de la partícula en el plano XZ.
     \item Y0:  Coordenada Y del punto de corte de la partícula con el plano en $z=0$.
     \item YP:  Pendiente proyectada de la partícula en el plano YZ.
@@ -330,56 +327,61 @@ Usando la definición de los cosenos directores de una recta en el espacio que a
 y las pendientes proyectadas de una saeta se definen como:
 \begin{align}
     \notag
-    \mathrm{X0}& = c_x / c_z, \\
-    \mathrm{Y0}& = c_y / c_z.
+    \mathrm{XP}& = c_x / c_z, \\
+    \mathrm{YP}& = c_y / c_z.
     \label{eq:proj}
 \end{align}
-
-% HASTA AQUI HE PODIDO LLEGAR.
 
 %Cada una de estas saetas generadas se añaden a la clase SimEvent como objetos de la clase Saeta.
 
 \subsection{Digitalización}
 
-Se digitalizan las trazas en función de todos aquellos puntos que intersecan con alguno de los planos del detector en una celda concreta, cuyas coordenadas tienen unidades de fila y columna. La información almacenada para cada intersección (hit) es: identificador del plano, columna, fila, instante de tiempo digitalizado.
-
-Cada uno de estos hits son de clase Hit, que también se almacenan en la clase SimEvent en una lista desordenada como ocurriría con los datos reales.
-
+Las trazas digitalizan a partir de todos aquellos puntos en los que intersectan con alguno de los planos del detector en un electrodo concreto y que como hemos visto, dependen de la geometría del detector. La información almacenada para cada intersección lo denominamos hit. Cada uno de estos hits son de clase Hit, que también se almacenan en la clase SimEvent en una lista desordenada. Esto es lo mismo que ocurre con los datos reales del detector que vienen determinados por el tiempo de llegada de las señales medidas a la electrónica de adquisición y los tiempos de retraso dentro de ésta. 
 
 \subsection{Análisis}
 
+El proceso de análisis consiste en reconstruir, mediante el algoritmo que se disponga y a partir de la información digitalizada proporcionada por el detector las trazas generadas y comparar la diferencia entre éstas y las generadas. Este estudio en función de los parámetros de incidencia que se desee (distribución de partículas incidentes, posición, ángulo, velocidad, etc.) permitirá estimar la resolución del detector en función de aquellos parámetros.  Así se podrán estudiar las prestaciones de un detector para distintas configuraciones y mejorar su diseño o determinar sus limitaciones.
 
-El análisis se realiza mediante el algoritmo de Kalman filter descrito con mayor profundidad y generalidad en la sección homónima del estudio de Jose A. Hernando \cite{joaneh}.
+En nuestro caso,  hemos escrito un código de reconstrucción basado  en el algoritmo del ``Kalman filter'' o filtrado de Kalman, que se describe con mayor profundidad y generalidad en la sección homónima de la referencia \cite{joaneh}.
 
-El método Kalman filter está destinado a encontrar la estimación óptima $\vec{r}$ del vector desconocido $\vec{r}^t$, el cual describe la saeta $\vec{s}$ de acuerdo con las medidas $\vec{m}_k$, $k = 1 ... n$ conocidas del vector $\vec{r}^t$ (medidas digitalizadas).
+En su formulación general, el método Kalman filter está destinado a encontrar la estimación óptima de un conjunto de parámetros dado por un llamado vector de estado $\vec{r}$ \footnote{Consideramos que, por defecto, todos los vectores  $\vec{r}$ son de naturaleza vertical y sus traspuestos  $\vec{r}^t$ son de naturaleza horizontal} desconocido a partir de un conjunto de medidas en los n planots, $\vec{m}_k$, $k = 1 ... n$.
+% ME HE PERDIDO! REVISAR
 
-Se comienza con una aproximación inicial $\vec{r} = \vec{r_0}$ y se refina el vector $\vec{r}$, consecutivamente añadiendo una medida después de la otra. El valor óptimo se alcanza después de añadir la última medida.
+Se comienza con una aproximación inicial $\vec{r} = \vec{r_n}$ en el último plano del detector y de forma recursiva de refina el vector $\vec{r}$, consecutivamente añadiendo sucesivamente la información proporcionada por el resto de los detectores. El valor óptimo se alcanza después de añadir la última medida tras la que se procede a un ajuste general. Dado que en un cierto plano puede haber diversas medidas asociadas al paso de varias partículas por el plano, el algoritmo intenta mejorar el ajuste del vector con cada una de las medidas y solo acepta aquellas que superen un cierto test de calidad. El método funciona así no solo como algoritmo de ajuste sino también como algoritmo búsqueda. 
 
-En este proceso se aplica para una combinación de hits que cumpla dos condiciones:
+En este proceso se aplica para una combinación de hits que cumpla las condiciones:
+% REVISAR ESTA PARTE
 \begin{itemize}
-    \item Todos los hits deben pertenecer a un plano y cada plano debe tener un sólo hit.
-    \item La partícula hipotética no debe superar $c$ para poder llegar desde la celda golpeada en el $k$-ésimo plano hasta el $(k + 1)$-ésimo.
+    \item El segmento que une dos hits en dos planos consecutivos debe de ser compatible con no  superar la velocidad de la luz, de acuerdo con la resolución de medida del detector
+    \item Cuando en un plano hay varios hits compatibles con el vector de estado que se está reconstruyendo se acepta aquel hit que proporciona una mejor calidad del ajuste
 \end{itemize}
 
 \subsubsection{Paso 1: \textsc{Inicialización}}
 
-Suponemos el valor inicial de la saeta situada en el plano T4 como un vector normal
+Partimos en el último plano del detector\footnote{Definimos este último plano del detector con el índice $0$ por ser el inicial.}, de un vector de estado, en nuestro caso una saeta, perpendicular al plano y centrado en uno de los hits medidos en dicho plano. Asumimos que su ``lentitud'' es la correspondiente a la velocidad de la luz $s_c = 1/c$. Así, la saeta inicial es.
 \begin{equation}
-    \vec{r_0} = (x_0, 0, y_0, 0, t_0, s_0)^T,
+    \vec{r}_0 = (x_0, 0, y_0, 0, t_0, s_c)^T,
     \label{eq:init}
-\end{equation}
-donde $x_0$, $y_0$ son las distancias desde el origen de coordenadas hasta el centro de la celda golpeada y $t_0$ el valor de tiempo en nanosegundos dados por uno de los objetos de la clase Hit pertenecientes al plano inferior. La lentitud se estima $s_0 = 1/c$, con $c$ la velocidad de la luz.
+\end{equation}  % Al no dejar una línea en blanco no hace falta utilizar \noindent
+donde $x_k$, $y_k$ y $t_k$ son los valores asociados a las tres variables $(x,y,t)$ medidas en el plano $k$.
 
-Su matriz de covarianza se establece como $C_0 = \vec{\upvarsigma}^T \cdot I_{6 \times 6} \cdot \vec{\upvarsigma}$, donde $\vec{\upvarsigma}$ es un vector vertical de las varianzas de las coordenadas de $\vec{r}$:
+Precisamos de la matriz de covarianza  de los parámetros del ajuste que se se establece como
+
 \begin{equation}
-    \vec{\upvarsigma} = (\sigma_x, \sigma_{x'}, \sigma_y, \sigma_{y'}, \sigma_t, \sigma_s)^T,
+    C_0 = \vec{\upvarsigma}^T \cdot I_{6 \times 6} \cdot \vec{\upvarsigma}
+    \label{eq:cov}
+\end{equation}
+donde $\vec{\upvarsigma}$ es un vector de las  varianzas de cada uno de los parámetros de $\vec{r}$:
+\begin{equation}
+    \vec{\upvarsigma} = (\sigma_x, \sigma_{x'}, \sigma_y, \sigma_{y'}, \sigma_t, \sigma_s)
     \label{eq:sigmas}
 \end{equation}
 
 \subsubsection{Paso 2: \textsc{Predicción}}
 
 % TODO: Hacer un apéndice con los valores de las constantes.
-Comienzo de la iteración por planos. Se propaga el vector desde el $(k - 1)$-ésimo hasta el $k$-ésimo plano mediante la matriz de transporte
+Comienzo de la iteración por planos. Se propaga el vector desde el  plano $k - 1$ hasta el plano $k$, mediante la matriz de transporte
+
 \begin{equation}
 F_k = 
 \left(
@@ -392,18 +394,22 @@ F_k =
 0 & 0    & 0 & 0    & 0 & 1         \\
 \end{matrix}\right)
 \end{equation}
+
 donde $\Delta z_k$ es la distancia entre dichos planos:
 
 \begin{equation}
 \Delta z_k = z_k - z_{k-1},
 \label{eq:dz}
 \end{equation}
-y $ks_k$ es
+
+y $ks_k$ es el llamado ``factor de pendiente'':
+
 \begin{equation}
-ks_k = \sqrt{1 + x_k'^2 + y_k'^2},
+ks_k = \sqrt{1 + x_k'^2 + y_k'^2}.
 \label{eq:ks}
 \end{equation}
-así que,
+
+Finalmente,
 \begin{align}
 \notag
 \tilde{\vec{r}}_k &= F_k \vec{r}_{k-1},\\
@@ -413,7 +419,7 @@ así que,
 
 \subsubsection{Paso 3: \textsc{Filtrado}}
 
-En este punto el vector $\tilde{\vec{r}}_k$  se actualiza con la nueva medida $\vec{m}_k$ para conseguir el estado óptimo de $\vec{r}_k$ y de su matriz de covarianza $C_k$:
+En esta etapa, el vector $\tilde{\vec{r}}_k$  se actualiza con la nueva medida $\vec{m}_k$ para calcular una estimación mejorada \footnote{Evidentemente esto es así si el hit nuevo hit incorporado corresponde a la saeta que queremos reconstruir ya que estamos añadiendo información sobre la misma} de $\vec{r}_k$ y de su matriz de covarianza $C_k$
 
 \begin{align}
 \notag
@@ -439,7 +445,7 @@ V_k = \left(
 \label{eq:V}
 \end{equation}
 
-La matriz del modelo es simplemente la matriz identidad $H_k = I_{3 \times 6}$
+La matriz del modelo es simplemente la matriz identidad $H$ definida como:
 \begin{equation}
 H_k = 
 \left(
@@ -475,7 +481,7 @@ que convierte un vector del espacio de parámetros $\vec{r}_k$ al espacio de med
 
 Deben iterarse desde el paso (2) hasta el (4) con $k$ para todos los planos detectores.
 
-La notación utilizada en esta sección se completa aquí: $\vec{r}_{k - 1}$, $C_{k - 1}$ son la estimación óptima obtenida y la matriz de covarianza en el paso previo; La matriz $F_k$ relaciona el estado en el paso $k - 1$ con el $k$\footnote{Notar que se empieza desde el plano inferior hasta el superior}; $\tilde{\vec{r}}_k$, $\tilde{C}_k$ son la estimación predicha de $\vec{r}^t_k$ y su matriz de covarianza; $\vec{m}_k$, $V_k$ es la medida y su matriz de covarianza $k$-ésimas; la matriz $H_k$ es la transformación del espacio de parámetros al espacio de medidas; la matriz $K_k$ es la llamada ``\textit{matriz de ganancia}''; el valor $\chi^2_k$ es la desviación total de la estimación obtenida $\vec{r}_k$ a partir de las medidas $\vec{m}_1$, ... $\vec{m}_k$ tal que:
+La notación utilizada en esta sección se completa aquí: $\vec{r}_{k - 1}$, $C_{k - 1}$ son la estimación óptima obtenida y la matriz de covarianza en el paso previo; La matriz $F_k$ relaciona el estado en el paso $k - 1$ con el $k$\footnote{Recuérdese que se empieza desde el plano inferior hasta el superior}; $\tilde{\vec{r}}_k$, $\tilde{C}_k$ son la estimación predicha de $\vec{r}^t_k$ y su matriz de covarianza; $\vec{m}_k$, $V_k$ es la medida y su matriz de covarianza $k$-ésimas; la matriz $H_k$ es la transformación del espacio de parámetros al espacio de medidas; la matriz $K_k$ es la llamada ``\textit{matriz de ganancia}''; el valor $\chi^2_k$ es la desviación total de la estimación obtenida $\vec{r}_k$ a partir de las medidas $\vec{m}_1$, ... $\vec{m}_k$ tal que:
 
 \begin{equation}
     \chi^2 = \sum_{j = 0}^{N} \sum_{i = 0}^{n} \frac{\left(x^{s}_{ij} - x^{m}_{ij} \right)}{\sigma_{i}^2}
@@ -484,10 +490,36 @@ siendo $N$ el número de hits utilizados para calcularlo y $n = 3$ el índice pa
 
 El vector $\vec{r}_n$ obtenido después del filtrado de la última medida es la estimación óptima obtenida de $\vec{r}^t_n$ con la matriz de covarianza $C_n$.
 
+\begin{figure}[h] 
+    \centering
+    \includegraphics[width=0.5\linewidth]{showers.jpg} 
+    \caption{} 
+    \label{fg:shower} 
+\end{figure}
 
 \section{Resultados de las simulaciones}
 
-En esta sección, se muestran los resultados de reconstrucciones. 
+En esta sección, se muestran los resultados de las reconstrucciones que hemos estimado para los detectores \textsc{tragaldabas} y \textsc{stratos} . Sus configuraciones respectivas se muestran en las figuras \ref{fg:tragas_rpc} y \ref{fg:stratos_rpc}.
+
+\begin{figure}[H]  % La "H" es para que se queden fijados en este mismo sitio. Para dejar decidir a LaTeX utilizar "ht"
+  \begin{subfigure}[b]{0.5\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{tragas_pitch.png} 
+    \caption{} 
+    \label{fg:tragas_rpc} 
+  \end{subfigure}%% 
+  \begin{subfigure}[b]{0.5\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{stratos_pitch.png} 
+    \caption{} 
+    \label{fg:stratos_rpc} 
+  \end{subfigure} 
+  \caption{Topología de las RPCs de \textsc{tragaldabas} y \textsc{stratos} respectivamente.}
+  \label{fg:tragastratos} 
+\end{figure}
+
+Hemos probado su correcto funcionamiento hasta hasta un número máximo de cinco trazas sin que las prestaciones se vean afectadas dada la gran granularidad que tienen ambo detectores. Es de destacar que, de acuerdo con las medidas previas hechas con el detector \textsc{tragaldabas}, la proporción de eventos con mas de 5 partículas simultáneas apenas representarán menos del 1 \% de la muestra total.  Por el contrario, el mayor rato será reconstruir cascadas complejas de partículas en las que los electrones de alta energía puedan dar lugar a cascadas electromagnéticas  como las que se muestran en la figura \ref{fg:shower}. Este es un proceso mas complicado de estudiar de forma automática y forma parte de la lista de prioridades generales del proyecto \textsc{stratos}.
+
 
 \subsection{Representación gráfica}
 
